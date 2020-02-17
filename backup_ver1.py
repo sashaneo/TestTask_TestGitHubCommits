@@ -1,8 +1,8 @@
 import os
 import time
 
-source = ['C:\\folder']
-target_dir = ['D:\\target']
+source = ['/home/sasha_neo/selenium_driver']
+target_dir = ['/media/sasha_neo/Sistem/target_dir']
 
 target = str(target_dir) + os.sep + time.strftime('%Y%m%d%H%M%S') + '.zip'
 print((target))
