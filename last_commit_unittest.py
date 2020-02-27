@@ -17,7 +17,8 @@ class TestLastCommit(unittest.TestCase):
         '''Getting id at commit page'''
 
         self.driver.get(comm_page)
-        last_comm = self.driver.find_elements_by_xpath('//*[@id="js-repo-pjax-container"]/div[2]/div/div[2]/ol[*]/li[*]/div[2]/div/clipboard-copy')
+        last_comm = self.driver.find_elements_by_xpath(
+            '//*[@id="js-repo-pjax-container"]/div[2]/div/div[2]/ol[*]/li[*]/div[2]/div/clipboard-copy')
         value_list = []
         for val in last_comm:
             commit_value = val.get_attribute('value')
@@ -25,7 +26,8 @@ class TestLastCommit(unittest.TestCase):
 
         '''Getting commit time'''
 
-        last_com_time = self.driver.find_elements_by_xpath('//*[@id="js-repo-pjax-container"]/div[2]/div/div[2]/ol[*]/li/div[*]/div/div[*]/relative-time')
+        last_com_time = self.driver.find_elements_by_xpath(
+            '//*[@id="js-repo-pjax-container"]/div[2]/div/div[2]/ol[*]/li/div[*]/div/div[*]/relative-time')
         time_list = []
         for i in last_com_time:
             dt = i.get_attribute('datetime')
@@ -37,6 +39,7 @@ class TestLastCommit(unittest.TestCase):
         dict_id_time = dict(zip(value_list, time_list))
         for k, v in dict_id_time.items():
             print(k, v)
+        print('-' * 60)
 
         '''Finding max value in dict'''
 
@@ -48,7 +51,8 @@ class TestLastCommit(unittest.TestCase):
         '''Getting id commit in the header of main page'''
 
         self.driver.get(main_page)
-        element_repo = self.driver.find_element_by_xpath('//*[@id="js-repo-pjax-container"]/div[2]/div/div[6]/div/div/div[3]/a')
+        element_repo = self.driver.find_element_by_xpath(
+            '//*[@id="js-repo-pjax-container"]/div[2]/div/div[6]/div/div/div[3]/a')
         link_repo = element_repo.get_attribute('href').split('/')
         id_main_page = link_repo[-1]
         print('main page: {}'.format(id_main_page))
