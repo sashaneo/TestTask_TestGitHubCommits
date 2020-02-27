@@ -2,16 +2,19 @@ from datetime import datetime
 from selenium import webdriver
 import unittest
 
+comm_page = 'https://github.com/django/django/commits/master'
+main_page = 'https://github.com/django/django'
 
-class test_Last_Commit(unittest.TestCase):
+
+class TestLastCommit(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
         self.driver.implicitly_wait(5)
-        self.driver.get('https://github.com/django/django/commits/master')
 
     def test_get_last_commit_id(self):
         '''Finding and assertion Ids'''
         """getting commit id"""
+        self.driver.get(comm_page)
         last_comm = self.driver.find_elements_by_xpath('//*[@id="js-repo-pjax-container"]/div[2]/div/div[2]/ol[*]/li[*]/div[2]/div/clipboard-copy')
         value_list = []
         for val in last_comm:
@@ -27,26 +30,29 @@ class test_Last_Commit(unittest.TestCase):
             commit_time = datetime.strptime(dt, '%Y-%m-%dT%H:%M:%SZ')
             time_list.append(commit_time)
 
+
         """creating a dictionary id/time"""
 
         dict_id_time = dict(zip(value_list, time_list))
+        for k, v in dict_id_time.items():
+            print(k, v)
 
         """finding max value in dict"""
 
         max_value = max(dict_id_time.values())
         final_dict = {k: v for k, v in dict_id_time.items() if v == max_value}
-        id_last_com = list(final_dict)[0]
-        print(id_last_com)
+        id_comm_page = list(final_dict)[0]
+        print('comm page: {}'.format(id_comm_page))
 
         """getting id commit in the header"""
-        self.driver.get('https://github.com/django/django')
+        self.driver.get(main_page)
         element_repo = self.driver.find_element_by_xpath('//*[@id="js-repo-pjax-container"]/div[2]/div/div[6]/div/div/div[3]/a')
         link_repo = element_repo.get_attribute('href').split('/')
-        id_commit_repo = link_repo[-1]
-        print(id_commit_repo)
+        id_main_page = link_repo[-1]
+        print('main page: {}'.format(id_main_page))
 
         """assertion commit id from different pages"""
-        assert id_last_com == id_commit_repo
+        assert id_main_page == id_comm_page
 
     def tearDown(self):
         self.driver.close()
