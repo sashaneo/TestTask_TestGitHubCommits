@@ -5,7 +5,6 @@ import unittest
 comm_page = 'https://github.com/django/django/commits/master'
 main_page = 'https://github.com/django/django'
 
-
 # comm_page = 'https://github.com/SeleniumHQ/selenium/commits/master'
 # main_page = 'https://github.com/SeleniumHQ/selenium'
 
