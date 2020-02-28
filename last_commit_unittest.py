@@ -6,6 +6,13 @@ comm_page = 'https://github.com/django/django/commits/master'
 main_page = 'https://github.com/django/django'
 
 
+# comm_page = 'https://github.com/SeleniumHQ/selenium/commits/master'
+# main_page = 'https://github.com/SeleniumHQ/selenium'
+
+# comm_page = 'https://github.com/jenkinsci/jenkins/commits/master'
+# main_page = 'https://github.com/jenkinsci/jenkins'
+
+
 class TestLastCommit(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
