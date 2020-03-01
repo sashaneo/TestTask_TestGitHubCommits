@@ -13,7 +13,7 @@ main_page = 'https://github.com/django/django'
 
 last_com_path = '//clipboard-copy'
 last_com_time_path = '//relative-time'
-element_repo_path = '//*[@id="js-repo-pjax-container"]/div[2]/div/div[6]/div/div/div[3]/a'
+element_repo_path = '//*[@class="no-wrap d-flex flex-self-start flex-items-baseline"]/a'
 
 
 class TestLastCommit(unittest.TestCase):
