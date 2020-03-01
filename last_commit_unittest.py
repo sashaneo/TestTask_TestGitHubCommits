@@ -19,7 +19,6 @@ element_repo_path = '//*[@class="no-wrap d-flex flex-self-start flex-items-basel
 class TestLastCommit(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
-        self.driver.implicitly_wait(5)
 
     def test_get_commit_id(self):
         """Finding and assertion Ids"""
