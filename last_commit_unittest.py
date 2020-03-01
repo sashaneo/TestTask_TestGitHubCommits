@@ -11,6 +11,10 @@ main_page = 'https://github.com/django/django'
 # comm_page = 'https://github.com/jenkinsci/jenkins/commits/master'
 # main_page = 'https://github.com/jenkinsci/jenkins'
 
+last_com_path = '//clipboard-copy'
+last_com_time_path = '//relative-time'
+element_repo_path = '//*[@id="js-repo-pjax-container"]/div[2]/div/div[6]/div/div/div[3]/a'
+
 
 class TestLastCommit(unittest.TestCase):
     def setUp(self):
@@ -23,8 +27,7 @@ class TestLastCommit(unittest.TestCase):
         '''Getting id at commit page'''
 
         self.driver.get(comm_page)
-        last_comm = self.driver.find_elements_by_xpath(
-            '//*[@id="js-repo-pjax-container"]/div[2]/div/div[2]/ol[*]/li[*]/div[2]/div/clipboard-copy')
+        last_comm = self.driver.find_elements_by_xpath(last_com_path)
         value_list = []
         for val in last_comm:
             commit_value = val.get_attribute('value')
@@ -32,8 +35,7 @@ class TestLastCommit(unittest.TestCase):
 
         '''Getting commit time'''
 
-        last_com_time = self.driver.find_elements_by_xpath(
-            '//*[@id="js-repo-pjax-container"]/div[2]/div/div[2]/ol[*]/li/div[*]/div/div[*]/relative-time')
+        last_com_time = self.driver.find_elements_by_xpath(last_com_time_path)
         time_list = []
         for i in last_com_time:
             dt = i.get_attribute('datetime')
@@ -57,8 +59,7 @@ class TestLastCommit(unittest.TestCase):
         '''Getting id commit in the header of main page'''
 
         self.driver.get(main_page)
-        element_repo = self.driver.find_element_by_xpath(
-            '//*[@id="js-repo-pjax-container"]/div[2]/div/div[6]/div/div/div[3]/a')
+        element_repo = self.driver.find_element_by_xpath(element_repo_path)
         link_repo = element_repo.get_attribute('href').split('/')
         id_main_page = link_repo[-1]
         print('main page: {}'.format(id_main_page))
