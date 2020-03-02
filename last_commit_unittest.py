@@ -13,7 +13,7 @@ main_page = 'https://github.com/django/django'
 
 last_com_path = '//clipboard-copy'
 last_com_time_path = '//relative-time'
-element_repo_path = '//*[@class="no-wrap d-flex flex-self-start flex-items-baseline"]/a'
+header_repo_path = '//*[@class="no-wrap d-flex flex-self-start flex-items-baseline"]/a'
 
 
 class TestLastCommit(unittest.TestCase):
@@ -58,8 +58,8 @@ class TestLastCommit(unittest.TestCase):
         '''Getting id commit in the header of main page'''
 
         self.driver.get(main_page)
-        element_repo = self.driver.find_element_by_xpath(element_repo_path)
-        link_repo = element_repo.get_attribute('href').split('/')
+        header_repo = self.driver.find_element_by_xpath(header_repo_path)
+        link_repo = header_repo.get_attribute('href').split('/')
         id_main_page = link_repo[-1]
         print('main page: {}'.format(id_main_page))
 
