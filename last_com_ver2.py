@@ -18,15 +18,13 @@ class TestLastCommit(unittest.TestCase):
         '''Getting id at commit page'''
 
         self.driver.get(comm_page)
-        commit_value = self.driver.find_element_by_xpath(commit_value_path)
-        id_comm_page = commit_value.get_attribute('value')
+        id_comm_page = self.driver.find_element_by_xpath(commit_value_path).get_attribute('value')
         print('comm page: {}'.format(id_comm_page))
 
         '''Getting id commit in the header of main page'''
 
         self.driver.get(main_page)
-        element_repo = self.driver.find_element_by_xpath(element_repo_path)
-        link_repo = element_repo.get_attribute('href').split('/')
+        link_repo = self.driver.find_element_by_xpath(element_repo_path).get_attribute('href').split('/')
         id_main_page = link_repo[-1]
         print('main page: {}'.format(id_main_page))
 
