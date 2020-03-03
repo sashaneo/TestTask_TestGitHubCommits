@@ -66,7 +66,7 @@ class TestLastCommit(unittest.TestCase):
 
         '''Assertion commit ids from different pages'''
 
-        assert id_main_page == id_comm_page
+        self.assertEqual(id_main_page, id_comm_page, "TEST PASSED")
 
     def tearDown(self):
         self.driver.close()
