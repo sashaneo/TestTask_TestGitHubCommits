@@ -4,13 +4,6 @@ import unittest
 
 comm_page = 'https://github.com/django/django/commits/master'
 main_page = 'https://github.com/django/django'
-
-# comm_page = 'https://github.com/SeleniumHQ/selenium/commits/master'
-# main_page = 'https://github.com/SeleniumHQ/selenium'
-
-# comm_page = 'https://github.com/jenkinsci/jenkins/commits/master'
-# main_page = 'https://github.com/jenkinsci/jenkins'
-
 last_com_path = '//clipboard-copy'
 last_com_time_path = '//relative-time'
 header_repo_path = '//*[@class="no-wrap d-flex flex-self-start flex-items-baseline"]/a'
@@ -28,19 +21,13 @@ class TestLastCommit(unittest.TestCase):
 
         self.driver.get(comm_page)
         last_comm = self.driver.find_elements_by_xpath(last_com_path)
-        value_list = []
-        for val in last_comm:
-            commit_value = val.get_attribute('value')
-            value_list.append(commit_value)
+        value_list = [value.get_attribute('value') for value in last_comm]
 
-        '''Getting commit time'''
+        '''Getting commit time at commit page'''
 
         last_com_time = self.driver.find_elements_by_xpath(last_com_time_path)
-        time_list = []
-        for i in last_com_time:
-            dt = i.get_attribute('datetime')
-            commit_time = datetime.strptime(dt, '%Y-%m-%dT%H:%M:%SZ')
-            time_list.append(commit_time)
+        time_list = [datetime.strptime(com_time.get_attribute('datetime'), '%Y-%m-%dT%H:%M:%SZ') for com_time in
+                     last_com_time]
 
         '''Creating a dictionary id/time'''
 
